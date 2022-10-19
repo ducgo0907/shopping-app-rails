@@ -13,6 +13,7 @@ gem 'puma', '~> 4.1'
 gem 'rack-cors'
 # Use gem devise for login logout
 gem 'devise'
+gem 'devise-jwt', '~> 0.7.0'
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
