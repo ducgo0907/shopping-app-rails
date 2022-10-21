@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :logged_in, only: [:update, :create, :destroy]
+
   def index
     @products = Product.all
     render json: @products
@@ -20,7 +22,8 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.create(product_params)
+    @product = current_user.products.create(product_params)
+    byebug
     if @product.save
       render json: @product
     else
@@ -36,7 +39,12 @@ class ProductsController < ApplicationController
   end
 
   private
+
   def product_params 
-    params.permit(:name, :description, :price)
+    params.require(:product).permit(:name, :description, :price)
+  end
+
+  def logged_in
+    render json: { Authorized: "You need to login to do it" , ss_id: session[:user_id]} unless !current_user.nil?
   end
 end

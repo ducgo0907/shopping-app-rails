@@ -11,4 +11,8 @@ class AuthenticationController < ApplicationController
     end
   end
 
+  def log_out
+    @user = User.find(params[:id])
+    
+  end
 end
