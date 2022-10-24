@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :logged_in, only: [:update, :create, :destroy]
+  skip_before_action :authenticate_request, only: [:index, :show]
 
   def index
     @products = Product.all
@@ -23,7 +24,6 @@ class ProductsController < ApplicationController
 
   def create
     @product = current_user.products.create(product_params)
-    byebug
     if @product.save
       render json: @product
     else
