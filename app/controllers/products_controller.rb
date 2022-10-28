@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :logged_in, only: [:update, :create, :destroy]
-  skip_before_action :authenticate_request, only: [:index, :show]
+  skip_before_action :authenticate_request, only: [:index, :show, :products_in_range]
 
   def index
     @products = Product.all
@@ -10,6 +9,17 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     render json: @product
+  end
+
+  def products_in_range
+    @products = Product.where("price between ? and ?", params[:min], params[:max])
+    render json: @products
+  end
+
+  def search
+    key = "%#{params[:key]}%"
+    @products = Product.where("name like ?", key)
+    render json: @products
   end
 
   def update
@@ -44,7 +54,4 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :description, :price)
   end
 
-  def logged_in
-    render json: { Authorized: "You need to login to do it" , ss_id: session[:user_id]} unless !current_user.nil?
-  end
 end
