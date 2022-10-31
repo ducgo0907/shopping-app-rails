@@ -3,6 +3,10 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    # h = {}
+    # @products.each do |product|
+    #   h[product.id.to_s] = product.image_url
+    # end
     render json: @products
   end
 
@@ -51,7 +55,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params 
-    params.require(:product).permit(:name, :description, :price)
+    params.require(:product).permit(:name, :description, :price, :image)
   end
 
 end
