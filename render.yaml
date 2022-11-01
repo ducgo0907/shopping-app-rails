@@ -1,7 +1,7 @@
 databases:
   - name: ShoppingApp
-    databaseName: ShoppingApp
-    user: ShoppingApp
+    databaseName: shopping_database
+    user: shopping_database_user
 
 services:
   - type: web
