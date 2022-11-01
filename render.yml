@@ -1,0 +1,18 @@
+databases:
+  - name: ShoppingApp
+    databaseName: ShoppingApp
+    user: ShoppingApp
+
+services:
+  - type: web
+    name: ShoppingApp
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: postgres://shopping_database_user:DIppyIZgWtRqBRB9ngiaOQDIXIjsyAEN@dpg-cdgdle5a4994kr1qjd9g-a/shopping_database
+        fromDatabase:
+          name: ShoppingApp
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
