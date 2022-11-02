@@ -2,11 +2,7 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_request, only: [:index, :show, :products_in_range]
 
   def index
-    @products = Product.all
-    # h = {}
-    # @products.each do |product|
-    #   h[product.id.to_s] = product.image_url
-    # end
+    @products = Product.all.order("id")
     render json: @products
   end
 
