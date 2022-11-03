@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   get 'products_in_range', to: "products#products_in_range"
   get 'search', to: "products#search"
   resources :users, only: [:create, :update, :show]
+  resources :shops, only: [:create, :index, :show]
 end

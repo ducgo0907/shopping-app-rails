@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :products
+  has_many :shops
   has_secure_password
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 50 },
