@@ -1,15 +1,15 @@
 class ShopsController < ApplicationController
-    skip_before_action :authenticate_request, only: [:index, :show]
+  skip_before_action :authenticate_request, only: [:index, :show]
   def index
-    @shops = Shop.all
+    @shops = Shop.where("user_id = ?", params[:id])
     render json: @shops
   end
 
   def show
-    @shops = Shop.find(params[:id])
-    @products = @shops.products
+    @shop = Shop.find(params[:id])
+    @products = @shop.products
     render json: {
-        shop: @shops,
+        shop: @shop,
         products: @products
     }
   end

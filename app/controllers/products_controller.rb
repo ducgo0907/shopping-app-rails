@@ -33,7 +33,8 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = current_user.products.create(product_params)
+    @shop = Shop.find(params[:shop_id])
+    @product = @shop.products.create(product_params)
     if @product.save
       render json: @product
     else

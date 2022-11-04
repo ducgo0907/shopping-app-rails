@@ -11,6 +11,7 @@ class AuthenticationController < ApplicationController
         is_logged: true,
         user_name: @current_user.name,
         user_id: @current_user.id,
+        shop_id: @current_user.shops.map(&:id)
       }
     else
       render json: { 

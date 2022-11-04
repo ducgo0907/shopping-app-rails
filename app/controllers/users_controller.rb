@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   def show
     user = User.find(params[:id])
-
     render json: {
       user: user.attributes.except("password_digest")
     }
@@ -32,6 +31,7 @@ class UsersController < ApplicationController
       render json: {
         status: :editted,
         user: user.attributes.except("password_digest"),
+        shop_id: user.shops.map(&:id)
       }
     else
       render json: {
